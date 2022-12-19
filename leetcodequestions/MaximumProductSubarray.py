@@ -4,6 +4,8 @@ class MaximumProductSubarray:
     def maxProduct(self, nums: List[int]) -> int:
         current_max_r = nums[0]
         potential_max_r = current_max_r
+        current_max_l = nums[len(nums)-1]
+        potential_max_l = current_max_l
 
         for i in range(1, len(nums)):
 
@@ -17,21 +19,17 @@ class MaximumProductSubarray:
             elif nums[i] > current_max_r:
                 current_max_r = nums[i]
 
-        
-        current_max_l = nums[len(nums)-1]
-        potential_max_l = current_max_l
+            k = len(nums) -1 - i
 
-        for i in reversed(range(0, len(nums)-1)):
+            potential_max_l = potential_max_l * nums[k]
 
-            potential_max_l = potential_max_l * nums[i]
-
-            if abs(nums[i]) > potential_max_l and abs(potential_max_l) < 2:
-                potential_max_l = nums[i]
+            if abs(k) > potential_max_l and abs(potential_max_l) < 2:
+                potential_max_l = nums[k]
             
             if potential_max_l > current_max_l:
                 current_max_l = potential_max_l
-            elif nums[i] > current_max_l:
-                current_max_l = nums[i]
+            elif nums[k] > current_max_l:
+                current_max_l = nums[k]
 
         return max(current_max_r, current_max_l)
 
