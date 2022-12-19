@@ -1,2 +1,2 @@
-dog = 5
-print(dog)
+dog = "\"Caleb\" \n\"Calvin\""
+print(dog) 
