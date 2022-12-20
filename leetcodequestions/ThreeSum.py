@@ -13,7 +13,7 @@ class ThreeSum:
              if candidate == prev_candidate:
                 continue
 
-             if candidate in pair_map and pair_map[candidate][len(pair_map[candidate])-1] > i:
+             if candidate in pair_map and pair_map[candidate] > i:
                 ans = [nums[st], nums[i], candidate]
                 answer.append(ans)
                 prev_candidate = candidate
@@ -24,10 +24,7 @@ class ThreeSum:
         nums.sort()
 
         for i in range(len(nums)):
-            if nums[i] not in pair_map:
-                    pair_map[nums[i]] = [i]
-            else:
-                pair_map[nums[i]].append(i)
+            pair_map[nums[i]] = i
 
         for i in range(len(nums)):
 
