@@ -10,31 +10,25 @@ class FewestCoins:
         if amount < coins[0]:
             return -1
 
-        ans_list =[0] + ([-1] * (coins[0]-1))
+        ans_list =[0] + ([999999999] * (coins[0]-1))
         for i in range(coins[0], amount +1):
             current_cost = i
-            curent_count = 999999999
-
+            min_array = []
             for j in range(len(coins)):
 
                 coin = coins[j]
                 if coin > current_cost:
                     break
 
-                multiplier = current_cost//coin
-                for k in range(1, multiplier+1):
-                    balance = current_cost - (k*coin)
-                    if ans_list[balance] != -1:
-                        temp_count = ans_list[balance] + k
-                        if temp_count < curent_count:
-                            curent_count = temp_count
-                            break
+                min_array.append(min([999999999, ans_list[current_cost - coin] + 1]))
 
-            if curent_count != 999999999:
-                ans_list.append(curent_count)
-            else:
-                ans_list.append(-1)
-        return ans_list[amount]
+            ans_list.append(min(min_array))
+
+
+        if ans_list[amount] == 999999999:
+            return -1
+        else:
+            return ans_list[amount]
 
 def test_fewest_coins():
     ts = FewestCoins()
